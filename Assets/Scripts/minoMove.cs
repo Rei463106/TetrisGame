@@ -1,26 +1,31 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// minoを動かすためのクラス
+/// </summary>
 public class minoMove : MonoBehaviour
 {
     [Header("落ちるまでの間隔")]
     [SerializeField] private float _prepareTime;
     [Header("横間隔")]
     [SerializeField] private int Width;
+    [Header("Spawn")]
+    [SerializeField] private Spawn _spawn;
 
     /// <summary>
     /// インターバル計測用
     /// </summary>
-    float _intervalTime;
+    private float _intervalTime;
 
     /// <summary>
     /// minoのX座標取得用
     /// </summary>
-    int roundX;
+    private int _roundX;
 
     /// <summary>
     /// minoのY座標取得用
     /// </summary>
-    int roundY;
+    private int _roundY;
 
     private void Update()
     {
@@ -47,11 +52,11 @@ public class minoMove : MonoBehaviour
         if (!JudgeEdge())
         {
             //現在のX座標を取得して、roundX<=0なら、そのBindingを書き換える…みたいな
-            if (roundX <= 0)
+            if (_roundX <= 0)
             {
                 Debug.Log("0");
             }
-            else if (roundX > Width)
+            else if (_roundX > Width)
             {
                 Debug.Log("Width");
             }
@@ -78,9 +83,9 @@ public class minoMove : MonoBehaviour
     {
         foreach (Transform t in transform)
         {
-            roundY = Mathf.RoundToInt(t.transform.position.y);
+            _roundY = Mathf.RoundToInt(t.transform.position.y);
 
-            if (roundY <= 0)
+            if (_roundY <= 0)
                 return false;
         }
         return true;
@@ -93,9 +98,9 @@ public class minoMove : MonoBehaviour
     {
         foreach (Transform t in transform)
         {
-            roundX = Mathf.RoundToInt(t.transform.position.x);
+            _roundX = Mathf.RoundToInt(t.transform.position.x);
 
-            if (roundX <= 0 || roundX > Width) return false;
+            if (_roundX <= 0 || _roundX > Width) return false;
         }
         return true;
     }

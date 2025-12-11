@@ -44,6 +44,8 @@ public class minoInputActions : MonoBehaviour
     /// <param name="context"></param>
     private void HandleMove(InputAction.CallbackContext context)
     {
+        if (this.gameObject.tag == "usedMino")
+            return;
         _moveInputValue = context.ReadValue<Vector2>();
         _minoMove.mMove(_moveInputValue);
     }
@@ -54,6 +56,8 @@ public class minoInputActions : MonoBehaviour
     /// <param name="context"></param>
     private void HandleRotation(InputAction.CallbackContext context)
     {
+        if (this.gameObject.tag == "usedMino")
+            return;
         _rotationInputValue = context.ReadValue<Vector2>();
         _minoMove.mRotation(_rotationInputValue);
     }

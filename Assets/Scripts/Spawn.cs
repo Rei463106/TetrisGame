@@ -1,17 +1,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// スポーン処理を書く
+/// </summary>
 public class Spawn : MonoBehaviour
 {
     [Header("スポーンする地点")]
-    [SerializeField] GameObject _spawnGameObject;
+    [SerializeField] private Transform _spawnGameObject;
     [Header("スポーンするもののリスト")]
-    [SerializeField] List<GameObject> _spawnList = new List<GameObject>();
-    void Start()
+    [SerializeField] private List<GameObject> _spawnList = new List<GameObject>();
+    [Header("minoMove")]
+    [SerializeField] private minoMove _minoMove;
+
+    /// <summary>
+    /// 現在生成されているmino
+    /// </summary>
+    private GameObject _nowObject;
+
+    /// <summary>
+    /// 一回だけ生成するためのフラグ
+    /// </summary>
+    private bool _isSpawnScheduled = false;
+
+    private void Start()
     {
-        int random = Random.Range(0, 6);
-        Instantiate(_spawnList[random], _spawnGameObject.transform.position, Quaternion.identity);
+        StartInstantiate();
     }
 
+    private void Update()
+    {
+        //もしJudgeGroundがFalseになったら、今のObjectのタグを切り替える
+        if (!_nowObject.GetComponent<minoMove>().JudgeGround())
+        {
+            // まだ予約していない時だけ実行
+            if (!_isSpawnScheduled)
+            {
+                _isSpawnScheduled = true; // 再実行を防ぐ
+                _nowObject.gameObject.tag = "usedMino";
+                //2秒後に生成を開始する
+                Invoke("StartInstantiate", 1);
+            }
+        }
+    }
 
+    /// <summary>
+    /// 一回目に行う処理
+    /// </summary>
+    public void StartInstantiate()
+    {
+        int random = Random.Range(0, 6);
+        _nowObject = Instantiate(_spawnList[random], _spawnGameObject.position, Quaternion.identity);
+        _isSpawnScheduled = false;
+    }
 }
