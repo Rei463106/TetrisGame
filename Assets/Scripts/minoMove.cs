@@ -7,10 +7,12 @@ public class minoMove : MonoBehaviour
 {
     [Header("落ちるまでの間隔")]
     [SerializeField] private float _prepareTime;
-    [Header("横間隔")]
-    [SerializeField] private int Width;
+    [Header("ミノの座標計測・横")]
+    [SerializeField] private int _width;
     [Header("Spawn")]
     [SerializeField] private Spawn _spawn;
+    [Header("GameManagement")]
+    [SerializeField] private GameManagement _gameManagement;
 
     /// <summary>
     /// インターバル計測用
@@ -29,6 +31,8 @@ public class minoMove : MonoBehaviour
 
     private void Update()
     {
+        //Debug.Log(_roundX);
+        //Debug.Log(_roundY);
         _intervalTime += Time.deltaTime;
 
         if (_prepareTime - _intervalTime <= 0)
@@ -54,17 +58,17 @@ public class minoMove : MonoBehaviour
             //現在のX座標を取得して、roundX<=0なら、そのBindingを書き換える…みたいな
             if (_roundX <= 0)
             {
-                Debug.Log("0");
+                //Debug.Log("0");
             }
-            else if (_roundX > Width)
+            else if (_roundX > _width)
             {
-                Debug.Log("Width");
+                //Debug.Log("Width");
             }
         }
         else if (JudgeEdge())
         {
             //キーのバインディングを復活させる
-            Debug.Log("復活！");
+            //Debug.Log("復活！");
         }
     }
 
@@ -85,7 +89,9 @@ public class minoMove : MonoBehaviour
         {
             _roundY = Mathf.RoundToInt(t.transform.position.y);
 
-            if (_roundY <= 0)
+            //ずっと何も入ってない…？？
+            //自分の動きも確認するため、グリッドをもう一個作る必要がある
+            if (_roundY <= 0 || _gameManagement._grid[_roundX, _roundY] != null)
                 return false;
         }
         return true;
@@ -100,7 +106,7 @@ public class minoMove : MonoBehaviour
         {
             _roundX = Mathf.RoundToInt(t.transform.position.x);
 
-            if (_roundX <= 0 || _roundX > Width) return false;
+            if (_roundX <= 0 || _roundX > _width) return false;
         }
         return true;
     }

@@ -423,5 +423,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::minoMove
   _prepareTime: 1
-  Width: 8
+  _width: 8
   _spawn: {fileID: 560140761365655753, guid: e4843f7de6d76c044b8a2f08bd5869df, type: 3}
+  _gameManagement: {fileID: 6532324970098915979, guid: e4843f7de6d76c044b8a2f08bd5869df, type: 3}

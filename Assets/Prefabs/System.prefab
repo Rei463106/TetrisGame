@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3299479717270009052}
   - component: {fileID: 560140761365655753}
+  - component: {fileID: 6532324970098915979}
   m_Layer: 0
   m_Name: System
   m_TagString: Untagged
@@ -54,3 +55,16 @@ MonoBehaviour:
   - {fileID: 8575938310749973450, guid: 4c5590fbe2364a5489780c780a785f61, type: 3}
   - {fileID: 424776861085721855, guid: 38c81537a8ebcd04aa3d16d4debf006c, type: 3}
   _minoMove: {fileID: 1074568971407230007, guid: a65189e0ef8ebb94385e269d2f041a93, type: 3}
+  _gameManagement: {fileID: 6532324970098915979}
+--- !u!114 &6532324970098915979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7369391419839160096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d58fea3aebefbd4881df345b4bbe238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManagement
